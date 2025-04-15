@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "libprg/libprg.h"
@@ -24,7 +25,31 @@ pilha_t* criar_pilha() {
 
     return pilha;
 }
-// push()
-// pop()
+
+void push(pilha_t* pilha, int valor) {
+
+    if (pilha->topo + 1 >= pilha->capacidade) {
+        printf("Erro: Não é possível empilhar!");
+        exit(EXIT_FAILURE);
+    }
+
+    pilha->topo++;
+    pilha->elementos[pilha->topo] = valor;
+}
+
+int pop(pilha_t* pilha) {
+
+    if (pilha->topo < 0) {
+        printf("Erro: A pilha está vazia!");
+        exit(EXIT_FAILURE);
+    }
+
+    int valor = pilha->elementos[pilha->topo];
+    pilha->topo--;
+
+    return valor;
+}
+
 // empty()
 // size()
+// destruir_pilha()
