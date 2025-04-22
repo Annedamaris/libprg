@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "libprg/libprg.h"
@@ -10,7 +11,7 @@ typedef struct pilha {
     int capacidade;
 } pilha_t;
 
-pilha_t* criar_pilha() {
+pilha_t* create_stack() {
 
     // Criar a estrutura pilha e alocar memória
     pilha_t* pilha = (pilha_t*) malloc(sizeof(pilha_t));
@@ -24,7 +25,43 @@ pilha_t* criar_pilha() {
 
     return pilha;
 }
-// push()
-// pop()
-// empty()
-// size()
+
+void push(pilha_t* pilha, int valor) {
+
+    if (pilha->topo >= pilha->capacidade - 1) {
+        printf(("Pilha cheia!"));
+        exit(EXIT_FAILURE);
+    }
+
+    pilha->topo++;
+    pilha->elementos[pilha->topo] = valor;
+}
+
+int pop(pilha_t* pilha) {
+
+    if (pilha->topo < 0) {
+        printf("Erro: A pilha está vazia.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    int valor = pilha->elementos[pilha->topo];
+    pilha->topo--;
+
+    return valor;
+}
+
+bool empty(pilha_t* pilha) {
+
+    return (pilha->topo < 0);
+}
+
+int size(pilha_t* pilha) {
+
+    return (pilha->topo + 1);
+}
+
+void destroy_stack(pilha_t* pilha) {
+
+    free(pilha->elementos);
+    free(pilha);
+}
