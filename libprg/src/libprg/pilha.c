@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +12,7 @@ typedef struct pilha {
     int capacidade;
 } pilha_t;
 
-pilha_t* criar_pilha() {
+pilha_t* create_stack() {
 
     // Criar a estrutura pilha e alocar memória
     pilha_t* pilha = (pilha_t*) malloc(sizeof(pilha_t));
@@ -50,6 +51,18 @@ int pop(pilha_t* pilha) {
     return valor;
 }
 
-// empty()
-// size()
-// destruir_pilha()
+bool empty(pilha_t* pilha) {
+
+    return pilha->topo == -1;
+}
+
+int size(pilha_t* pilha) {
+
+    return pilha->topo + 1;
+}
+
+void detroy_stack(pilha_t* pilha) {
+
+    free(pilha->elementos);
+    free(pilha);
+}
