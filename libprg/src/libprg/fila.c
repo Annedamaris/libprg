@@ -54,7 +54,7 @@ int dequeue(fila_t *fila) {
     return valor;
 }
 
-bool empty(fila_t* fila) {
+bool emptyq(fila_t* fila) {
     return fila->quantidade == 0;
 }
 
@@ -62,7 +62,7 @@ bool full(fila_t* fila) {
     return fila->quantidade == fila->capacidade;
 }
 
-int size(fila_t* fila) {
+int sizeq(fila_t* fila) {
     return fila->quantidade;
 }
 

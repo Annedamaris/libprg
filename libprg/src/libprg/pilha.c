@@ -48,12 +48,12 @@ int pop(pilha_t* pilha) {
     return valor;
 }
 
-bool empty(pilha_t* pilha) {
+bool emptys(pilha_t* pilha) {
 
     return pilha->topo == -1;
 }
 
-int size(pilha_t* pilha) {
+int sizes(pilha_t* pilha) {
 
     return pilha->topo + 1;
 }
