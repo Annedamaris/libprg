@@ -11,13 +11,10 @@ typedef struct pilha {
 
 pilha_t* create_stack() {
 
-    // Criar a estrutura pilha e alocar memória
-    pilha_t* pilha = (pilha_t*) malloc(sizeof(pilha_t));
+        pilha_t* pilha = (pilha_t*) malloc(sizeof(pilha_t));
 
-    // Alocar memória para os elementos da pilha
-    pilha->elementos = (int*) malloc(sizeof(int) * CAPACIDADE_INICIAL);
+        pilha->elementos = (int*) malloc(sizeof(int) * CAPACIDADE_INICIAL);
 
-    // Definir os valores iniciais da pilha
     pilha->topo = -1;
     pilha->capacidade = CAPACIDADE_INICIAL;
 

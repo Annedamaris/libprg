@@ -1,80 +1,59 @@
-//
-// Created by adriano.lima on 25/04/25.
-//
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "libprg/libprg.h"
 
 typedef struct fila {
-    int *elementos;
+    int* elementos;
     int inicio;
     int fim;
     int capacidade;
-    int quantidade;
+    int tamanho;
 } fila_t;
 
-fila_t *create_queue() {
-    // Criar estrutura fila e alocar memória
-    fila_t *fila = (fila_t *) malloc(sizeof(fila_t));
 
-    // Alocar memória para os elementos da fila
-    fila->elementos = (int *) malloc(sizeof(int) * CAPACIDADE_INICIAL);
-
-    // Definir os valores iniciais da fila
-    fila->inicio = 0;
-    fila->fim = 0;
-    fila->capacidade = CAPACIDADE_INICIAL;
-
-    return fila;
+bool cheia(fila_t* fila) {
+    return fila->tamanho == fila->capacidade;
 }
 
-void enqueue(fila_t *fila, int valor) {
-    if (fila->quantidade == fila->capacidade) {
-        printf(("Erro: Fila cheia (overflow)"));
+
+fila_t* Criar_fila(int capacidade) {
+    fila_t* f = (fila_t*)malloc(sizeof(fila_t));
+    if (f == NULL) {
+        perror("Erro ao alocar memória para a fila");
         exit(EXIT_FAILURE);
+    }
+
+    f->elementos = (int*)malloc(capacidade * sizeof(int));
+    if (f->elementos == NULL) {
+        perror("Erro ao alocar memória para os elementos");
+        free(f);
+        exit(EXIT_FAILURE);
+    }
+
+    f->inicio = 0;
+    f->fim = 0;
+    f->capacidade = capacidade;
+    f->tamanho = 0; // Inicialmente, a fila está vazia
+
+    return f;
+}
+
+void enfileirar(fila_t* fila, int valor) {
+    if (cheia(fila)) {
+        printf("Erro: A fila está cheia.\n");
+        return;
     }
 
     fila->elementos[fila->fim] = valor;
     fila->fim = (fila->fim + 1) % fila->capacidade;
-    fila->quantidade++;
+    fila->tamanho++;
 }
 
-int dequeue(fila_t *fila) {
 
-    if (fila->quantidade == 0) {
-        printf("Erro: Fila vazia (underflow)");
-        exit(EXIT_FAILURE);
-    }
-
-    int valor = fila->elementos[fila->inicio];
-    fila->inicio = (fila->inicio + 1) % fila->capacidade;
-    fila->quantidade--;
-    return valor;
-}
-
-bool emptyq(fila_t* fila) {
-    return fila->quantidade == 0;
-}
-
-bool full(fila_t* fila) {
-    return fila->quantidade == fila->capacidade;
-}
-
-int sizeq(fila_t* fila) {
-    return fila->quantidade;
-}
-
-int head(fila_t* fila) {
-    return fila->elementos[fila->inicio];
-}
-
-int tail(fila_t* fila) {
-    return fila->elementos[fila->fim];
-}
-
- void destroy_queue(fila_t* fila) {
+void Destruir_fila(fila_t* fila) {
+    if (fila == NULL) return;
     free(fila->elementos);
     free(fila);
 }

@@ -34,4 +34,17 @@ int search(lista_t* lista, int valor);
 bool removel(lista_t* lista, int valor);
 void destroy_list(lista_t* lista);
 
+/*---LISTA ENCADEADA ---*/
+typedef struct no no_t;
+no_t* criar_lista_encadeada(int valor);
+void adicionar(no_t** inicio, int valor);
+no_t* buscar_lista_encadeada (no_t** inicio, int valor);
+void remover(no_t** inicio, int valor);
+void destruir(no_t** inicio);
+
+/*---LISTA ENCADEADA CIRCULAR ---*/
+no_t* criar_lista_encadeada_circular(int valor);
+void adicirar_circular(no_t** inicio, int valor);
+
 #endif
+#endif //LABORATORIO_LIBPROG_H
